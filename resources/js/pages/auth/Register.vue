@@ -1,12 +1,6 @@
 <script setup lang="ts">
-import InputError from '@/components/InputError.vue';
-import TextLink from '@/components/TextLink.vue';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import AuthBase from '@/layouts/AuthLayout.vue';
-import { Head, useForm } from '@inertiajs/vue3';
-import { LoaderCircle } from 'lucide-vue-next';
+import StoreAuthLayout from '@/layouts/StoreAuthLayout.vue';
+import { Head, useForm, Link } from '@inertiajs/vue3';
 
 const form = useForm({
     name: '',
@@ -23,61 +17,86 @@ const submit = () => {
 </script>
 
 <template>
-    <AuthBase title="Create an account" description="Enter your details below to create your account">
-        <Head title="Register" />
+    <StoreAuthLayout title="Sign Up" description="Create your account to start shopping premium flooring solutions">
+        <Head title="Sign Up" />
 
-        <form @submit.prevent="submit" class="flex flex-col gap-6">
-            <div class="grid gap-6">
-                <div class="grid gap-2">
-                    <Label for="name">Name</Label>
-                    <Input id="name" type="text" required autofocus :tabindex="1" autocomplete="name" v-model="form.name" placeholder="Full name" />
-                    <InputError :message="form.errors.name" />
-                </div>
-
-                <div class="grid gap-2">
-                    <Label for="email">Email address</Label>
-                    <Input id="email" type="email" required :tabindex="2" autocomplete="email" v-model="form.email" placeholder="email@example.com" />
-                    <InputError :message="form.errors.email" />
-                </div>
-
-                <div class="grid gap-2">
-                    <Label for="password">Password</Label>
-                    <Input
-                        id="password"
-                        type="password"
-                        required
-                        :tabindex="3"
-                        autocomplete="new-password"
-                        v-model="form.password"
-                        placeholder="Password"
-                    />
-                    <InputError :message="form.errors.password" />
-                </div>
-
-                <div class="grid gap-2">
-                    <Label for="password_confirmation">Confirm password</Label>
-                    <Input
-                        id="password_confirmation"
-                        type="password"
-                        required
-                        :tabindex="4"
-                        autocomplete="new-password"
-                        v-model="form.password_confirmation"
-                        placeholder="Confirm password"
-                    />
-                    <InputError :message="form.errors.password_confirmation" />
-                </div>
-
-                <Button type="submit" class="mt-2 w-full" tabindex="5" :disabled="form.processing">
-                    <LoaderCircle v-if="form.processing" class="h-4 w-4 animate-spin" />
-                    Create account
-                </Button>
+        <form @submit.prevent="submit" class="space-y-6">
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                <input
+                    id="name"
+                    type="text"
+                    required
+                    autofocus
+                    autocomplete="name"
+                    v-model="form.name"
+                    placeholder="Enter your full name"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900 bg-white placeholder-gray-500"
+                    :class="{ 'border-red-500': form.errors.name }"
+                />
+                <p v-if="form.errors.name" class="mt-1 text-sm text-red-600">{{ form.errors.name }}</p>
             </div>
 
-            <div class="text-center text-sm text-muted-foreground">
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                <input
+                    id="email"
+                    type="email"
+                    required
+                    autocomplete="email"
+                    v-model="form.email"
+                    placeholder="Enter your email"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900 bg-white placeholder-gray-500"
+                    :class="{ 'border-red-500': form.errors.email }"
+                />
+                <p v-if="form.errors.email" class="mt-1 text-sm text-red-600">{{ form.errors.email }}</p>
+            </div>
+
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                <input
+                    id="password"
+                    type="password"
+                    required
+                    autocomplete="new-password"
+                    v-model="form.password"
+                    placeholder="Create a secure password"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900 bg-white placeholder-gray-500"
+                    :class="{ 'border-red-500': form.errors.password }"
+                />
+                <p v-if="form.errors.password" class="mt-1 text-sm text-red-600">{{ form.errors.password }}</p>
+            </div>
+
+            <div>
+                <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
+                <input
+                    id="password_confirmation"
+                    type="password"
+                    required
+                    autocomplete="new-password"
+                    v-model="form.password_confirmation"
+                    placeholder="Confirm your password"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900 bg-white placeholder-gray-500"
+                    :class="{ 'border-red-500': form.errors.password_confirmation }"
+                />
+                <p v-if="form.errors.password_confirmation" class="mt-1 text-sm text-red-600">{{ form.errors.password_confirmation }}</p>
+            </div>
+
+            <button
+                type="submit"
+                :disabled="form.processing"
+                class="w-full bg-green-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+                <span v-if="form.processing">Creating account...</span>
+                <span v-else>Create Account</span>
+            </button>
+
+            <div class="text-center text-sm text-gray-600">
                 Already have an account?
-                <TextLink :href="route('login')" class="underline underline-offset-4" :tabindex="6">Log in</TextLink>
+                <Link :href="route('login')" class="text-green-600 hover:text-green-700 font-medium">
+                    Sign in here
+                </Link>
             </div>
         </form>
-    </AuthBase>
+    </StoreAuthLayout>
 </template>

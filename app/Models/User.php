@@ -21,6 +21,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'phone',
+        'address',
+        'timezone',
+        'locale',
     ];
 
     /**
@@ -44,5 +49,35 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function inventoryTransactions()
+    {
+        return $this->hasMany(InventoryTransaction::class);
+    }
+
+    public function hasRole($role)
+    {
+        return $this->role === $role;
+    }
+
+    public function hasAnyRole($roles)
+    {
+        return in_array($this->role, $roles);
+    }
+
+    public function isAdmin()
+    {
+        return in_array($this->role, ['admin', 'super_admin']);
+    }
+
+    public function canManageInventory()
+    {
+        return in_array($this->role, ['shop_manager', 'supervisor', 'admin', 'super_admin']);
     }
 }
