@@ -6,18 +6,18 @@
       <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <div class="max-w-3xl">
           <h1 class="text-4xl md:text-6xl font-bold mb-6">
-            Premium Flooring
-            <span class="text-green-300">Solutions</span>
+            {{ t('premium_flooring') }}
+            <span class="text-green-300">{{ t('solutions') }}</span>
           </h1>
           <p class="text-xl md:text-2xl mb-8 text-green-100">
-            Transform your space with our extensive collection of high-quality flooring options. From hardwood to luxury vinyl, we have the perfect solution for every room.
+            {{ t('hero_description') }}
           </p>
           <div class="flex flex-col sm:flex-row gap-4">
             <Link :href="route('products')" class="bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-green-50 transition-colors inline-flex items-center justify-center">
-              Shop All Products
+              {{ t('shop_all_products') }}
             </Link>
             <Link :href="route('samples')" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-600 transition-colors inline-flex items-center justify-center">
-              Order Free Samples
+              {{ t('order_free_samples') }}
             </Link>
           </div>
         </div>
@@ -29,10 +29,10 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
           <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Browse by Category
+            {{ t('browse_by_category') }}
           </h2>
           <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-            Discover our extensive range of flooring options, each designed to meet different needs and aesthetic preferences.
+            {{ t('categories_description') }}
           </p>
         </div>
         
@@ -64,10 +64,10 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
           <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Featured Products
+            {{ t('featured_products') }}
           </h2>
           <p class="text-lg text-gray-600">
-            Our most popular and recommended flooring solutions
+            {{ t('featured_products_description') }}
           </p>
         </div>
 
@@ -77,7 +77,7 @@
 
         <div class="text-center mt-12">
           <Link :href="route('products')" class="bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors">
-            View All Products
+            {{ t('view_all_products') }}
           </Link>
         </div>
       </div>
@@ -91,22 +91,22 @@
             <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <TruckIcon class="h-8 w-8 text-green-600" />
             </div>
-            <h3 class="text-xl font-semibold mb-2">Free Shipping</h3>
-            <p class="text-gray-600">Free delivery on orders over $500. Fast and reliable shipping nationwide.</p>
+            <h3 class="text-xl font-semibold mb-2">{{ t('free_shipping') }}</h3>
+            <p class="text-gray-600">{{ t('free_shipping_description') }}</p>
           </div>
           <div class="text-center">
             <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <SwatchIcon class="h-8 w-8 text-green-600" />
             </div>
-            <h3 class="text-xl font-semibold mb-2">Free Samples</h3>
-            <p class="text-gray-600">Order up to 8 free samples to see and feel the quality before you buy.</p>
+            <h3 class="text-xl font-semibold mb-2">{{ t('free_samples') }}</h3>
+            <p class="text-gray-600">{{ t('free_samples_description') }}</p>
           </div>
           <div class="text-center">
             <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <ShieldCheckIcon class="h-8 w-8 text-green-600" />
             </div>
-            <h3 class="text-xl font-semibold mb-2">Quality Guarantee</h3>
-            <p class="text-gray-600">All our products come with comprehensive warranties and quality guarantees.</p>
+            <h3 class="text-xl font-semibold mb-2">{{ t('quality_guarantee') }}</h3>
+            <p class="text-gray-600">{{ t('quality_guarantee_description') }}</p>
           </div>
         </div>
       </div>
@@ -116,17 +116,17 @@
     <section class="py-16 bg-green-600 text-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 class="text-3xl md:text-4xl font-bold mb-4">
-          Need Help Choosing?
+          {{ t('need_help_choosing') }}
         </h2>
         <p class="text-xl text-green-100 mb-8 max-w-2xl mx-auto">
-          Our flooring experts are here to help you find the perfect solution for your space. Get personalized recommendations and professional advice.
+          {{ t('expert_help_description') }}
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <Link :href="route('contact')" class="bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-green-50 transition-colors">
-            Contact Our Experts
+            {{ t('contact_our_experts') }}
           </Link>
           <a href="tel:555-123-4567" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-600 transition-colors">
-            Call (555) 123-4567
+            {{ t('call_phone_number') }}
           </a>
         </div>
       </div>
@@ -138,11 +138,14 @@
 import { Link } from '@inertiajs/vue3'
 import ShopLayout from '@/layouts/ShopLayout.vue'
 import ProductCard from '@/components/ProductCard.vue'
+import { useLocale } from '@/composables/useLocale'
 import { 
   TruckIcon, 
   SwatchIcon, 
   ShieldCheckIcon 
 } from '@heroicons/vue/24/outline'
+
+const { t } = useLocale()
 
 interface Category {
   id: number

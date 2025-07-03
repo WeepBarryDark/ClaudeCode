@@ -51,6 +51,39 @@ class HandleInertiaRequests extends Middleware
                 'location' => $request->url(),
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
+            'locale' => app()->getLocale(),
+            'timezone' => $request->user()?->timezone ?? 'UTC',
+            'translations' => $this->getTranslations(),
         ];
+    }
+    
+    private function getTranslations(): array
+    {
+        $locale = app()->getLocale();
+        $path = lang_path($locale . '/messages.php');
+        
+        // Debug log
+        \Log::info('Loading translations', [
+            'locale' => $locale,
+            'path' => $path,
+            'file_exists' => file_exists($path)
+        ]);
+        
+        if (file_exists($path)) {
+            $translations = include $path;
+            \Log::info('Translations loaded', [
+                'locale' => $locale,
+                'translation_count' => count($translations)
+            ]);
+            return $translations;
+        }
+        
+        // Fallback to English
+        $fallbackPath = lang_path('en/messages.php');
+        if (file_exists($fallbackPath)) {
+            return include $fallbackPath;
+        }
+        
+        return [];
     }
 }

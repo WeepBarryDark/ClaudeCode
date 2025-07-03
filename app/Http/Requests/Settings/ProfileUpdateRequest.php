@@ -25,6 +25,18 @@ class ProfileUpdateRequest extends FormRequest
                 'max:255',
                 Rule::unique(User::class)->ignore($this->user()->id),
             ],
+            'timezone' => ['required', 'string', Rule::in([
+                'Australia/Sydney',
+                'Australia/Melbourne', 
+                'Australia/Brisbane',
+                'Australia/Perth',
+                'Australia/Adelaide',
+                'Pacific/Auckland',
+                'Pacific/Chatham',
+                'Asia/Shanghai',
+                'Asia/Hong_Kong',
+                'Asia/Macau',
+            ])],
         ];
     }
 }

@@ -53,6 +53,11 @@
     <!-- Bottom Section -->
     <div class="absolute bottom-0 left-0 right-0 p-3 border-t border-gray-200">
       <div class="space-y-2">
+        <!-- Language Selector -->
+        <div class="px-3 py-2">
+          <LanguageSelector />
+        </div>
+        
         <Link :href="route('home')" class="flex items-center px-3 py-2 text-sm font-medium rounded-lg text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors group">
           <Store class="h-5 w-5 mr-3 text-gray-400 group-hover:text-green-600" />
           Back to Store
@@ -152,6 +157,9 @@ import {
   Bars3Icon,
   XMarkIcon
 } from '@heroicons/vue/24/outline'
+import LanguageSelector from './LanguageSelector.vue'
+import { useLocale } from '@/composables/useLocale'
 
+const { t } = useLocale()
 const mobileMenuOpen = ref(false)
 </script>

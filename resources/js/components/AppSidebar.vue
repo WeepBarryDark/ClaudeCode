@@ -15,38 +15,41 @@ import {
     Store
 } from 'lucide-vue-next';
 import { type NavItem } from '@/types';
+import { useLocale } from '@/composables/useLocale';
+import LanguageSelector from '@/components/LanguageSelector.vue';
 
 const page = usePage();
 const mobileMenuOpen = ref(false);
+const { t } = useLocale();
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
+        title: t('dashboard'),
         href: '/admin/dashboard',
         icon: LayoutGrid,
     },
     {
-        title: 'Products',
+        title: t('products'),
         href: '/admin/products',
         icon: Package,
     },
     {
-        title: 'Orders',
+        title: t('orders'),
         href: '/admin/orders',
         icon: ShoppingCart,
     },
     {
-        title: 'Inventory',
+        title: t('inventory'),
         href: '/admin/inventory',
         icon: BarChart3,
     },
     {
-        title: 'Customers',
+        title: t('customers'),
         href: '/admin/customers',
         icon: Users,
     },
     {
-        title: 'Messages',
+        title: t('messages'),
         href: '/admin/messages',
         icon: MessageSquare,
     },
@@ -54,12 +57,12 @@ const mainNavItems: NavItem[] = [
 
 const footerNavItems: NavItem[] = [
     {
-        title: 'Back to Shop',
+        title: t('back_to_shop'),
         href: '/',
         icon: Store,
     },
     {
-        title: 'Settings',
+        title: t('settings'),
         href: '/settings/profile',
         icon: Settings,
     },
@@ -76,8 +79,8 @@ const footerNavItems: NavItem[] = [
                     <span class="text-white font-bold text-sm">EF</span>
                 </div>
                 <div>
-                    <span class="text-lg font-bold text-gray-900">Ecos Flooring</span>
-                    <span class="block text-xs text-gray-500">Admin Panel</span>
+                    <span class="text-lg font-bold text-gray-900">{{ t('ecos_flooring') }}</span>
+                    <span class="block text-xs text-gray-500">{{ t('admin_panel') }}</span>
                 </div>
             </Link>
         </div>
@@ -113,13 +116,18 @@ const footerNavItems: NavItem[] = [
                     <div class="absolute bottom-full left-0 right-0 mb-1 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                         <Link :href="route('profile.edit')"
                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 rounded-t-md">
-                            Profile Settings
+                            {{ t('profile_settings') }}
                         </Link>
                         <Link :href="route('logout')" method="post" as="button"
                               class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-green-50 border-t rounded-b-md">
-                            Sign Out
+                            {{ t('sign_out') }}
                         </Link>
                     </div>
+                </div>
+                
+                <!-- Language Selector -->
+                <div class="mt-3 px-3">
+                    <LanguageSelector />
                 </div>
             </div>
         </div>
@@ -136,8 +144,8 @@ const footerNavItems: NavItem[] = [
                     <span class="text-white font-bold text-sm">EF</span>
                 </div>
                 <div>
-                    <span class="text-lg font-bold text-gray-900">Ecos Flooring</span>
-                    <span class="block text-xs text-gray-500">Admin Panel</span>
+                    <span class="text-lg font-bold text-gray-900">{{ t('ecos_flooring') }}</span>
+                    <span class="block text-xs text-gray-500">{{ t('admin_panel') }}</span>
                 </div>
             </Link>
             <button @click="mobileMenuOpen = false" class="p-2 text-gray-700">

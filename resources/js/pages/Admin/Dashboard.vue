@@ -1,39 +1,39 @@
 <template>
-  <StoreAdminLayout pageTitle="Dashboard">
+  <StoreAdminLayout :pageTitle="t('dashboard')">
     <div>
       <!-- Header -->
       <div class="mb-8">
-        <h1 class="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
-        <p class="text-gray-600 mt-2">Welcome back, {{ user.name }}! Here's what's happening with your store.</p>
+        <h1 class="text-3xl font-bold text-gray-900">{{ t('admin_dashboard') }}</h1>
+        <p class="text-gray-600 mt-2">{{ t('welcome_back_message', { name: user.name }) }}</p>
       </div>
 
       <!-- Statistics Cards -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <StatCard
-          title="Total Products"
+          :title="t('total_products')"
           :value="stats.total_products"
-          :subtitle="`${stats.active_products} active`"
+          :subtitle="t('active_count', { count: stats.active_products })"
           icon="📦"
           color="blue"
         />
         <StatCard
-          title="Total Orders"
+          :title="t('total_orders')"
           :value="stats.total_orders"
-          :subtitle="`${stats.pending_orders} pending`"
+          :subtitle="t('pending_count', { count: stats.pending_orders })"
           icon="📋"
           color="green"
         />
         <StatCard
-          title="Customers"
+          :title="t('customers')"
           :value="stats.total_customers"
-          subtitle="registered users"
+          :subtitle="t('registered_users')"
           icon="👥"
           color="purple"
         />
         <StatCard
-          title="Messages"
+          :title="t('messages')"
           :value="stats.unread_messages"
-          subtitle="unread"
+          :subtitle="t('unread')"
           icon="✉️"
           color="yellow"
           :highlight="stats.unread_messages > 0"
@@ -225,6 +225,7 @@
 import { Link } from '@inertiajs/vue3'
 import StoreAdminLayout from '@/layouts/StoreAdminLayout.vue'
 import StatCard from '@/components/StatCard.vue'
+import { useLocale } from '@/composables/useLocale'
 import { 
   ExclamationTriangleIcon,
   PlusIcon,
@@ -232,6 +233,8 @@ import {
   UsersIcon,
   ChatBubbleLeftIcon
 } from '@heroicons/vue/24/outline'
+
+const { t } = useLocale()
 
 interface User {
   id: number

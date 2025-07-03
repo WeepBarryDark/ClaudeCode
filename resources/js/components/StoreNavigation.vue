@@ -9,7 +9,7 @@
             <div class="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
               <span class="text-white font-bold text-sm">EF</span>
             </div>
-            <span class="text-xl font-bold text-gray-900">Ecos Flooring</span>
+            <span class="text-xl font-bold text-gray-900">{{ t('ecos_flooring') }}</span>
           </Link>
         </div>
 
@@ -18,11 +18,11 @@
           <Link :href="route('home')" 
                 class="text-gray-700 hover:text-green-600 px-3 py-2 text-sm font-medium transition-colors"
                 :class="{ 'text-green-600 border-b-2 border-green-600': route().current('home') }">
-            Home
+            {{ t('home') }}
           </Link>
           <div class="relative group">
             <button class="text-gray-700 hover:text-green-600 px-3 py-2 text-sm font-medium transition-colors flex items-center">
-              Flooring Products
+              {{ t('flooring_products') }}
               <ChevronDownIcon class="ml-1 h-4 w-4" />
             </button>
             <div class="absolute top-full left-0 mt-1 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
@@ -33,29 +33,32 @@
               </Link>
               <Link :href="route('products')"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600 border-t">
-                View All Products
+                {{ t('view_all_products') }}
               </Link>
             </div>
           </div>
           <Link :href="route('samples')" 
                 class="text-gray-700 hover:text-green-600 px-3 py-2 text-sm font-medium transition-colors"
                 :class="{ 'text-green-600 border-b-2 border-green-600': route().current('samples') }">
-            Order Samples
+            {{ t('order_samples') }}
           </Link>
           <Link :href="route('contact')" 
                 class="text-gray-700 hover:text-green-600 px-3 py-2 text-sm font-medium transition-colors"
                 :class="{ 'text-green-600 border-b-2 border-green-600': route().current('contact') }">
-            Contact Us
+            {{ t('contact_us') }}
           </Link>
           <Link :href="route('about')" 
                 class="text-gray-700 hover:text-green-600 px-3 py-2 text-sm font-medium transition-colors"
                 :class="{ 'text-green-600 border-b-2 border-green-600': route().current('about') }">
-            About Us
+            {{ t('about_us') }}
           </Link>
         </div>
 
         <!-- Cart & Auth -->
         <div class="flex items-center space-x-4">
+          <!-- Language Selector -->
+          <LanguageSelector />
+          
           <Link :href="route('cart')" class="relative p-2 text-gray-700 hover:text-green-600 transition-colors">
             <ShoppingCartIcon class="h-6 w-6" />
             <span v-if="cartCount > 0" class="absolute -top-1 -right-1 bg-green-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
@@ -72,25 +75,25 @@
               <Link :href="route('admin.dashboard')" 
                     v-if="$page.props.auth.user && ['shop_manager', 'supervisor', 'admin', 'super_admin'].includes($page.props.auth.user.role)"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50">
-                Admin Dashboard
+                {{ t('admin_dashboard') }}
               </Link>
               <Link :href="route('profile.edit')"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50">
-                Profile Settings
+                {{ t('profile_settings') }}
               </Link>
               <Link :href="route('logout')" method="post" as="button"
                     class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-green-50 border-t">
-                Sign Out
+                {{ t('sign_out') }}
               </Link>
             </div>
           </div>
           
           <div v-else class="flex items-center space-x-2">
             <Link :href="route('login')" class="text-sm text-gray-700 hover:text-green-600 transition-colors">
-              Sign In
+              {{ t('sign_in') }}
             </Link>
             <Link :href="route('register')" class="bg-green-600 text-white px-4 py-2 rounded-md text-sm hover:bg-green-700 transition-colors">
-              Sign Up
+              {{ t('sign_up') }}
             </Link>
           </div>
         </div>
@@ -107,16 +110,16 @@
       <!-- Mobile menu -->
       <div v-show="mobileMenuOpen" class="md:hidden border-t border-gray-200 pt-4 pb-3">
         <div class="space-y-2">
-          <Link :href="route('home')" class="block px-3 py-2 text-gray-700 hover:text-green-600">Home</Link>
-          <Link :href="route('products')" class="block px-3 py-2 text-gray-700 hover:text-green-600">All Products</Link>
+          <Link :href="route('home')" class="block px-3 py-2 text-gray-700 hover:text-green-600">{{ t('home') }}</Link>
+          <Link :href="route('products')" class="block px-3 py-2 text-gray-700 hover:text-green-600">{{ t('view_all_products') }}</Link>
           <Link v-for="category in categories" :key="category.id"
                 :href="route('products.category', category.slug)"
                 class="block px-6 py-2 text-sm text-gray-600 hover:text-green-600">
             {{ category.name }}
           </Link>
-          <Link :href="route('samples')" class="block px-3 py-2 text-gray-700 hover:text-green-600">Order Samples</Link>
-          <Link :href="route('contact')" class="block px-3 py-2 text-gray-700 hover:text-green-600">Contact Us</Link>
-          <Link :href="route('about')" class="block px-3 py-2 text-gray-700 hover:text-green-600">About Us</Link>
+          <Link :href="route('samples')" class="block px-3 py-2 text-gray-700 hover:text-green-600">{{ t('order_samples') }}</Link>
+          <Link :href="route('contact')" class="block px-3 py-2 text-gray-700 hover:text-green-600">{{ t('contact_us') }}</Link>
+          <Link :href="route('about')" class="block px-3 py-2 text-gray-700 hover:text-green-600">{{ t('about_us') }}</Link>
         </div>
       </div>
     </div>
@@ -133,6 +136,8 @@ import {
   Bars3Icon, 
   XMarkIcon 
 } from '@heroicons/vue/24/outline'
+import LanguageSelector from './LanguageSelector.vue'
+import { useLocale } from '@/composables/useLocale'
 
 interface Category {
   id: number
@@ -148,6 +153,7 @@ const props = withDefaults(defineProps<Props>(), {
   categories: () => []
 })
 
+const { t } = useLocale()
 const mobileMenuOpen = ref(false)
 
 const cartCount = computed(() => {

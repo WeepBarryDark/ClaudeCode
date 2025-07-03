@@ -9,6 +9,7 @@ import { NavigationMenu, NavigationMenuItem, NavigationMenuList, navigationMenuT
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import UserMenuContent from '@/components/UserMenuContent.vue';
+import LanguageSelector from '@/components/LanguageSelector.vue';
 import { getInitials } from '@/composables/useInitials';
 import type { BreadcrumbItem, NavItem } from '@/types';
 import { Link, usePage } from '@inertiajs/vue3';
@@ -85,6 +86,9 @@ const rightNavItems: NavItem[] = [
                                     </Link>
                                 </nav>
                                 <div class="flex flex-col space-y-4">
+                                    <div class="border-t pt-4">
+                                        <LanguageSelector />
+                                    </div>
                                     <a
                                         v-for="item in rightNavItems"
                                         :key="item.title"
@@ -132,6 +136,8 @@ const rightNavItems: NavItem[] = [
                         <Button variant="ghost" size="icon" class="group h-9 w-9 cursor-pointer">
                             <Search class="size-5 opacity-80 group-hover:opacity-100" />
                         </Button>
+                        
+                        <LanguageSelector />
 
                         <div class="hidden space-x-1 lg:flex">
                             <template v-for="item in rightNavItems" :key="item.title">

@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
+import { useLocale } from '@/composables/useLocale';
 import { type BreadcrumbItem, type User } from '@/types';
 
 interface Props {
@@ -27,10 +28,12 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 const page = usePage();
 const user = page.props.auth.user as User;
+const { t, availableTimezones } = useLocale();
 
 const form = useForm({
     name: user.name,
     email: user.email,
+    timezone: user.timezone || 'UTC',
 });
 
 const submit = () => {
@@ -46,7 +49,7 @@ const submit = () => {
 
         <SettingsLayout>
             <div class="flex flex-col space-y-6">
-                <HeadingSmall title="Profile information" description="Update your name and email address" />
+                <HeadingSmall title="Profile information" description="Update your name, email address and timezone" />
 
                 <form @submit.prevent="submit" class="space-y-6">
                     <div class="grid gap-2">
@@ -67,6 +70,22 @@ const submit = () => {
                             placeholder="Email address"
                         />
                         <InputError class="mt-2" :message="form.errors.email" />
+                    </div>
+
+                    <div class="grid gap-2">
+                        <Label for="timezone">{{ t('timezone') }}</Label>
+                        <select
+                            id="timezone"
+                            v-model="form.timezone"
+                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        >
+                            <optgroup v-for="group in availableTimezones" :key="group.group" :label="group.group">
+                                <option v-for="zone in group.zones" :key="zone.code" :value="zone.code">
+                                    {{ zone.name }}
+                                </option>
+                            </optgroup>
+                        </select>
+                        <InputError class="mt-2" :message="form.errors.timezone" />
                     </div>
 
                     <div v-if="mustVerifyEmail && !user.email_verified_at">
