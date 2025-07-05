@@ -17,10 +17,10 @@
         <!-- Results Info -->
         <div class="flex items-center justify-between mb-6">
           <p class="text-gray-600">
-            {{ products.data.length }} products in {{ category.name }}
+            {{ products.data.length }} {{ t('products_found') }} {{ t('in') }} {{ category.name }}
           </p>
           <div class="flex items-center space-x-2">
-            <span class="text-sm text-gray-600">View:</span>
+            <span class="text-sm text-gray-600">{{ t('view') }}:</span>
             <button
               @click="viewMode = 'grid'"
               :class="[
@@ -74,7 +74,7 @@
                   :alt="product.name"
                   class="w-full h-full object-cover rounded-lg"
                 />
-                <span v-else class="text-gray-500">No Image</span>
+                <span v-else class="text-gray-500">{{ t('no_image') }}</span>
               </div>
               <div class="flex-1">
                 <div class="flex flex-col h-full">
@@ -83,11 +83,11 @@
                     <p class="text-gray-600 mb-3">{{ product.description }}</p>
                     <div class="flex flex-wrap gap-4 text-sm text-gray-500">
                       <span v-if="product.colors?.length">
-                        Colors: {{ product.colors.slice(0, 3).join(', ') }}
-                        <span v-if="product.colors.length > 3">+{{ product.colors.length - 3 }} more</span>
+                        {{ t('colors_label') }}: {{ product.colors.slice(0, 3).join(', ') }}
+                        <span v-if="product.colors.length > 3">+{{ product.colors.length - 3 }} {{ t('more') }}</span>
                       </span>
                       <span v-if="product.sizes?.length">
-                        Sizes: {{ product.sizes.join(', ') }}
+                        {{ t('sizes_label') }}: {{ product.sizes.join(', ') }}
                       </span>
                     </div>
                   </div>
@@ -105,13 +105,13 @@
                         :href="route('product.show', product.id)"
                         class="px-4 py-2 border border-green-600 text-green-600 rounded-lg hover:bg-green-50 transition-colors"
                       >
-                        View Details
+                        {{ t('view_details') }}
                       </Link>
                       <button
                         @click="addToCart(product.id)"
                         class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
                       >
-                        Add to Cart
+                        {{ t('add_to_cart') }}
                       </button>
                     </div>
                   </div>
@@ -148,10 +148,10 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2 2v-5m16 0h-2M4 13h2m0 0V9a2 2 0 012-2h2m4 0h2a2 2 0 012 2v4M6 9h2m3 0h3" />
             </svg>
           </div>
-          <h3 class="text-lg font-medium text-gray-900 mb-2">No products found</h3>
-          <p class="text-gray-600 mb-4">There are no products in this category yet.</p>
+          <h3 class="text-lg font-medium text-gray-900 mb-2">{{ t('no_products_found') }}</h3>
+          <p class="text-gray-600 mb-4">{{ t('no_products_in_category') }}</p>
           <Link :href="route('products')" class="text-green-600 hover:text-green-700 font-medium">
-            Browse all products
+            {{ t('browse_all_products') }}
           </Link>
         </div>
       </div>
@@ -164,6 +164,9 @@ import { ref } from 'vue'
 import { Link, router } from '@inertiajs/vue3'
 import ShopLayout from '@/layouts/ShopLayout.vue'
 import ProductCard from '@/components/ProductCard.vue'
+import { useLocale } from '@/composables/useLocale'
+
+const { t } = useLocale()
 
 interface Category {
   id: number

@@ -11,14 +11,14 @@
       
       <!-- Discount Badge -->
       <div v-if="hasDiscount" class="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-md text-xs font-semibold">
-        {{ discountPercentage }}% OFF
+        {{ discountPercentage }}% {{ t('off') }}
       </div>
       
       <!-- Quick View Button -->
       <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
         <Link :href="route('product.show', product.id)" 
               class="bg-white text-gray-900 px-4 py-2 rounded-lg font-medium opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-          Quick View
+          {{ t('quick_view') }}
         </Link>
       </div>
     </div>
@@ -63,7 +63,7 @@
       
       <!-- Product Options Preview -->
       <div v-if="product.colors && product.colors.length > 0" class="mt-3">
-        <p class="text-xs text-gray-500 mb-1">Available Colors:</p>
+        <p class="text-xs text-gray-500 mb-1">{{ t('available_colors') }}:</p>
         <div class="flex space-x-1">
           <div v-for="(color, index) in product.colors.slice(0, 4)" :key="color"
                class="w-4 h-4 rounded-full border border-gray-300"
@@ -71,7 +71,7 @@
                :title="color">
           </div>
           <span v-if="product.colors.length > 4" class="text-xs text-gray-500">
-            +{{ product.colors.length - 4 }} more
+            +{{ product.colors.length - 4 }} {{ t('more') }}
           </span>
         </div>
       </div>
@@ -83,6 +83,9 @@
 import { ref, computed } from 'vue'
 import { Link, router } from '@inertiajs/vue3'
 import { ShoppingCartIcon, SwatchIcon } from '@heroicons/vue/24/outline'
+import { useLocale } from '@/composables/useLocale'
+
+const { t } = useLocale()
 
 interface Category {
   id: number

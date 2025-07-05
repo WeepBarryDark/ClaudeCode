@@ -1,20 +1,20 @@
 <template>
-  <StoreAdminLayout pageTitle="Inventory">
+  <StoreAdminLayout :pageTitle="t('inventory')">
     <div>
       <!-- Header Actions -->
       <div class="mb-6 flex justify-between items-center">
         <div>
-          <p class="text-gray-600">Track stock levels and manage inventory</p>
+          <p class="text-gray-600">{{ t('track_stock_manage_inventory') }}</p>
         </div>
         <div class="flex space-x-3">
           <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors">
-            Export Report
+            {{ t('export_report') }}
           </button>
           <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-            Import CSV
+            {{ t('import_csv') }}
           </button>
           <button class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
-            Stock Adjustment
+            {{ t('stock_adjustment') }}
           </button>
         </div>
       </div>
@@ -27,7 +27,7 @@
               <span class="text-blue-600 text-sm">📦</span>
             </div>
             <div>
-              <p class="text-sm text-gray-600">Total Products</p>
+              <p class="text-sm text-gray-600">{{ t('total_products') }}</p>
               <p class="text-2xl font-bold text-gray-900">{{ stats.totalProducts }}</p>
             </div>
           </div>
@@ -39,7 +39,7 @@
               <span class="text-red-600 text-sm">⚠️</span>
             </div>
             <div>
-              <p class="text-sm text-gray-600">Low Stock</p>
+              <p class="text-sm text-gray-600">{{ t('low_stock') }}</p>
               <p class="text-2xl font-bold text-gray-900">{{ stats.lowStock }}</p>
             </div>
           </div>
@@ -51,7 +51,7 @@
               <span class="text-yellow-600 text-sm">📊</span>
             </div>
             <div>
-              <p class="text-sm text-gray-600">Total Value</p>
+              <p class="text-sm text-gray-600">{{ t('total_value') }}</p>
               <p class="text-2xl font-bold text-gray-900">${{ stats.totalValue }}</p>
             </div>
           </div>
@@ -63,7 +63,7 @@
               <span class="text-green-600 text-sm">✅</span>
             </div>
             <div>
-              <p class="text-sm text-gray-600">In Stock</p>
+              <p class="text-sm text-gray-600">{{ t('in_stock') }}</p>
               <p class="text-2xl font-bold text-gray-900">{{ stats.inStock }}</p>
             </div>
           </div>
@@ -77,22 +77,22 @@
             <input
               type="text"
               v-model="searchQuery"
-              placeholder="Search inventory..."
+              :placeholder="t('search_inventory')"
               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 text-gray-900 bg-white placeholder-gray-500"
             />
           </div>
           <select v-model="categoryFilter" class="px-3 py-2 border border-gray-300 rounded-lg text-gray-900 bg-white">
-            <option value="">All Categories</option>
+            <option value="">{{ t('all_categories') }}</option>
             <option value="hardwood">Hardwood</option>
             <option value="vinyl">Vinyl</option>
             <option value="laminate">Laminate</option>
             <option value="tile">Tile</option>
           </select>
           <select v-model="stockFilter" class="px-3 py-2 border border-gray-300 rounded-lg text-gray-900 bg-white">
-            <option value="">All Stock Levels</option>
-            <option value="in_stock">In Stock</option>
-            <option value="low_stock">Low Stock</option>
-            <option value="out_of_stock">Out of Stock</option>
+            <option value="">{{ t('all_stock_levels') }}</option>
+            <option value="in_stock">{{ t('in_stock') }}</option>
+            <option value="low_stock">{{ t('low_stock') }}</option>
+            <option value="out_of_stock">{{ t('out_of_stock') }}</option>
           </select>
         </div>
       </div>
@@ -100,7 +100,7 @@
       <!-- Inventory Table -->
       <div class="bg-white rounded-lg shadow overflow-hidden">
         <div class="px-6 py-4 border-b border-gray-200">
-          <h3 class="text-lg font-semibold text-gray-900">Stock Management</h3>
+          <h3 class="text-lg font-semibold text-gray-900">{{ t('stock_management') }}</h3>
         </div>
         
         <!-- Table -->
@@ -108,13 +108,13 @@
           <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
               <tr>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Current Stock</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Min Stock</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Unit Cost</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Value</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ t('product') }}</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ t('category') }}</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ t('current_stock') }}</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ t('min_stock') }}</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ t('unit_cost') }}</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ t('total_value') }}</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ t('actions') }}</th>
               </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
@@ -138,7 +138,7 @@
                     item.currentStock <= item.minStock ? 'bg-yellow-100 text-yellow-800' :
                     'bg-green-100 text-green-800'
                   ]">
-                    {{ item.currentStock }} units
+                    {{ item.currentStock }} {{ t('units') }}
                   </span>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ item.minStock }}</td>
@@ -147,9 +147,9 @@
                   ${{ (item.currentStock * parseFloat(item.unitCost)).toFixed(2) }}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                  <button class="text-green-600 hover:text-green-900 mr-3">Adjust</button>
-                  <button class="text-blue-600 hover:text-blue-900 mr-3">Reorder</button>
-                  <button class="text-gray-600 hover:text-gray-900">History</button>
+                  <button class="text-green-600 hover:text-green-900 mr-3">{{ t('adjust') }}</button>
+                  <button class="text-blue-600 hover:text-blue-900 mr-3">{{ t('reorder') }}</button>
+                  <button class="text-gray-600 hover:text-gray-900">{{ t('history') }}</button>
                 </td>
               </tr>
             </tbody>
@@ -160,12 +160,12 @@
         <div class="px-6 py-4 border-t border-gray-200">
           <div class="flex items-center justify-between">
             <div class="text-sm text-gray-700">
-              Showing 1 to {{ Math.min(10, filteredInventory.length) }} of {{ filteredInventory.length }} results
+              {{ t('showing_results', { from: 1, to: Math.min(10, filteredInventory.length), total: filteredInventory.length }) }}
             </div>
             <div class="flex space-x-2">
-              <button class="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">Previous</button>
+              <button class="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">{{ t('previous') }}</button>
               <button class="px-3 py-1 bg-green-600 text-white rounded text-sm">1</button>
-              <button class="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">Next</button>
+              <button class="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">{{ t('next') }}</button>
             </div>
           </div>
         </div>
@@ -177,6 +177,9 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import StoreAdminLayout from '@/layouts/StoreAdminLayout.vue'
+import { useLocale } from '@/composables/useLocale'
+
+const { t } = useLocale()
 
 const searchQuery = ref('')
 const categoryFilter = ref('')

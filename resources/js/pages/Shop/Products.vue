@@ -5,10 +5,9 @@
       <section class="bg-gray-50 py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center">
-            <h1 class="text-4xl font-bold text-gray-900 mb-4">Our Flooring Collection</h1>
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">{{ t('our_flooring_collection') }}</h1>
             <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-              Discover premium flooring solutions for every space. From elegant hardwood to durable luxury vinyl, 
-              find the perfect flooring that combines beauty, durability, and value.
+              {{ t('flooring_collection_description') }}
             </p>
           </div>
         </div>
@@ -27,7 +26,7 @@
                   : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
               ]"
             >
-              All Products
+              {{ t('all_products') }}
             </button>
             <button
               v-for="category in categories"
@@ -51,38 +50,38 @@
           <!-- Sidebar Filters -->
           <div class="lg:w-64 flex-shrink-0">
             <div class="bg-gray-50 rounded-lg p-6 sticky top-32">
-              <h3 class="text-lg font-semibold text-gray-900 mb-4">Filters</h3>
+              <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ t('filters') }}</h3>
               
               <!-- Price Range -->
               <div class="mb-6">
-                <h4 class="text-sm font-medium text-gray-900 mb-3">Price Range</h4>
+                <h4 class="text-sm font-medium text-gray-900 mb-3">{{ t('price_range') }}</h4>
                 <div class="space-y-2">
                   <label class="flex items-center">
                     <input type="radio" v-model="priceRange" value="all" class="mr-2 text-green-600">
-                    <span class="text-sm text-gray-700">All Prices</span>
+                    <span class="text-sm text-gray-700">{{ t('all_prices') }}</span>
                   </label>
                   <label class="flex items-center">
                     <input type="radio" v-model="priceRange" value="0-3" class="mr-2 text-green-600">
-                    <span class="text-sm text-gray-700">Under $3.00</span>
+                    <span class="text-sm text-gray-700">{{ t('under_3') }}</span>
                   </label>
                   <label class="flex items-center">
                     <input type="radio" v-model="priceRange" value="3-6" class="mr-2 text-green-600">
-                    <span class="text-sm text-gray-700">$3.00 - $6.00</span>
+                    <span class="text-sm text-gray-700">{{ t('price_3_6') }}</span>
                   </label>
                   <label class="flex items-center">
                     <input type="radio" v-model="priceRange" value="6-10" class="mr-2 text-green-600">
-                    <span class="text-sm text-gray-700">$6.00 - $10.00</span>
+                    <span class="text-sm text-gray-700">{{ t('price_6_10') }}</span>
                   </label>
                   <label class="flex items-center">
                     <input type="radio" v-model="priceRange" value="10+" class="mr-2 text-green-600">
-                    <span class="text-sm text-gray-700">$10.00+</span>
+                    <span class="text-sm text-gray-700">{{ t('price_10_plus') }}</span>
                   </label>
                 </div>
               </div>
 
               <!-- Colors -->
               <div class="mb-6">
-                <h4 class="text-sm font-medium text-gray-900 mb-3">Colors</h4>
+                <h4 class="text-sm font-medium text-gray-900 mb-3">{{ t('colors') }}</h4>
                 <div class="grid grid-cols-3 gap-2">
                   <button
                     v-for="color in availableColors"
@@ -112,7 +111,7 @@
 
               <!-- Sizes -->
               <div class="mb-6">
-                <h4 class="text-sm font-medium text-gray-900 mb-3">Sizes</h4>
+                <h4 class="text-sm font-medium text-gray-900 mb-3">{{ t('sizes') }}</h4>
                 <div class="space-y-2">
                   <label
                     v-for="size in availableSizes"
@@ -132,15 +131,15 @@
 
               <!-- Sort By -->
               <div>
-                <h4 class="text-sm font-medium text-gray-900 mb-3">Sort By</h4>
+                <h4 class="text-sm font-medium text-gray-900 mb-3">{{ t('sort_by') }}</h4>
                 <select
                   v-model="sortBy"
                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
                 >
-                  <option value="name">Name (A-Z)</option>
-                  <option value="price_low">Price: Low to High</option>
-                  <option value="price_high">Price: High to Low</option>
-                  <option value="newest">Newest First</option>
+                  <option value="name">{{ t('name_a_z') }}</option>
+                  <option value="price_low">{{ t('price_low_high') }}</option>
+                  <option value="price_high">{{ t('price_high_low') }}</option>
+                  <option value="newest">{{ t('newest_first') }}</option>
                 </select>
               </div>
 
@@ -149,7 +148,7 @@
                 @click="clearFilters"
                 class="w-full mt-4 px-4 py-2 text-sm text-green-600 border border-green-600 rounded-lg hover:bg-green-50 transition-colors"
               >
-                Clear All Filters
+                {{ t('clear_all_filters') }}
               </button>
             </div>
           </div>
@@ -159,11 +158,11 @@
             <!-- Results Info -->
             <div class="flex items-center justify-between mb-6">
               <p class="text-gray-600">
-                {{ filteredProducts.length }} products found
-                <span v-if="selectedCategory">in {{ selectedCategoryName }}</span>
+                {{ filteredProducts.length }} {{ t('products_found') }}
+                <span v-if="selectedCategory">{{ t('in') }} {{ selectedCategoryName }}</span>
               </p>
               <div class="flex items-center space-x-2">
-                <span class="text-sm text-gray-600">View:</span>
+                <span class="text-sm text-gray-600">{{ t('view') }}:</span>
                 <button
                   @click="viewMode = 'grid'"
                   :class="[
@@ -196,13 +195,13 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </div>
-              <h3 class="text-lg font-medium text-gray-900 mb-2">No products found</h3>
-              <p class="text-gray-600 mb-4">Try adjusting your filters or search criteria</p>
+              <h3 class="text-lg font-medium text-gray-900 mb-2">{{ t('no_products_found') }}</h3>
+              <p class="text-gray-600 mb-4">{{ t('try_adjusting_filters') }}</p>
               <button
                 @click="clearFilters"
                 class="text-green-600 hover:text-green-700 font-medium"
               >
-                Clear all filters
+                {{ t('clear_all_filters_button') }}
               </button>
             </div>
 
@@ -234,7 +233,7 @@
                       :alt="product.name"
                       class="w-full h-full object-cover rounded-lg"
                     />
-                    <span v-else class="text-gray-500">No Image</span>
+                    <span v-else class="text-gray-500">{{ t('no_image') }}</span>
                   </div>
                   <div class="flex-1">
                     <div class="flex flex-col h-full">
@@ -246,11 +245,11 @@
                         <p class="text-gray-600 mb-3">{{ product.description }}</p>
                         <div class="flex flex-wrap gap-4 text-sm text-gray-500">
                           <span v-if="product.colors?.length">
-                            Colors: {{ product.colors.slice(0, 3).join(', ') }}
-                            <span v-if="product.colors.length > 3">+{{ product.colors.length - 3 }} more</span>
+                            {{ t('colors_label') }}: {{ product.colors.slice(0, 3).join(', ') }}
+                            <span v-if="product.colors.length > 3">+{{ product.colors.length - 3 }} {{ t('more') }}</span>
                           </span>
                           <span v-if="product.sizes?.length">
-                            Sizes: {{ product.sizes.join(', ') }}
+                            {{ t('sizes_label') }}: {{ product.sizes.join(', ') }}
                           </span>
                         </div>
                       </div>
@@ -268,13 +267,13 @@
                             :href="route('product.show', product.id)"
                             class="px-4 py-2 border border-green-600 text-green-600 rounded-lg hover:bg-green-50 transition-colors"
                           >
-                            View Details
+                            {{ t('view_details') }}
                           </Link>
                           <button
                             @click="addToCart(product.id)"
                             class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
                           >
-                            Add to Cart
+                            {{ t('add_to_cart') }}
                           </button>
                         </div>
                       </div>
@@ -295,6 +294,9 @@ import { ref, computed, onMounted } from 'vue'
 import { Link, router } from '@inertiajs/vue3'
 import ShopLayout from '@/layouts/ShopLayout.vue'
 import ProductCard from '@/components/ProductCard.vue'
+import { useLocale } from '@/composables/useLocale'
+
+const { t } = useLocale()
 
 interface Category {
   id: number

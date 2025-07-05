@@ -17,16 +17,16 @@
               <div class="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
                 <span class="text-white font-bold text-sm">EF</span>
               </div>
-              <span class="text-xl font-bold">Ecos Flooring</span>
+              <span class="text-xl font-bold">{{ t('ecos_flooring') }}</span>
             </div>
             <p class="text-gray-400 text-sm">
-              Premium flooring solutions for your home and business. Quality materials, expert installation, and exceptional service.
+              {{ t('footer_description') }}
             </p>
           </div>
           <div>
-            <h3 class="font-semibold mb-4">Products</h3>
+            <h3 class="font-semibold mb-4">{{ t('products') }}</h3>
             <ul class="space-y-2 text-sm text-gray-400">
-              <li><Link :href="route('products')" class="hover:text-white transition-colors">All Flooring</Link></li>
+              <li><Link :href="route('products')" class="hover:text-white transition-colors">{{ t('all_flooring') }}</Link></li>
               <li v-for="category in categories.slice(0, 4)" :key="category.id">
                 <Link :href="route('products.category', category.slug)" class="hover:text-white transition-colors">
                   {{ category.name }}
@@ -35,26 +35,26 @@
             </ul>
           </div>
           <div>
-            <h3 class="font-semibold mb-4">Services</h3>
+            <h3 class="font-semibold mb-4">{{ t('services') }}</h3>
             <ul class="space-y-2 text-sm text-gray-400">
-              <li><Link :href="route('samples')" class="hover:text-white transition-colors">Free Samples</Link></li>
-              <li><a href="#" class="hover:text-white transition-colors">Installation</a></li>
-              <li><a href="#" class="hover:text-white transition-colors">Consultation</a></li>
-              <li><a href="#" class="hover:text-white transition-colors">Warranty</a></li>
+              <li><Link :href="route('samples')" class="hover:text-white transition-colors">{{ t('free_samples') }}</Link></li>
+              <li><a href="#" class="hover:text-white transition-colors">{{ t('installation') }}</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">{{ t('consultation') }}</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">{{ t('warranty') }}</a></li>
             </ul>
           </div>
           <div>
-            <h3 class="font-semibold mb-4">Contact</h3>
+            <h3 class="font-semibold mb-4">{{ t('contact') }}</h3>
             <ul class="space-y-2 text-sm text-gray-400">
-              <li>Phone: (555) 123-4567</li>
-              <li>Email: info@ecosflooring.com</li>
-              <li>Mon-Fri: 8AM-6PM</li>
-              <li>Sat: 9AM-4PM</li>
+              <li>{{ t('phone') }}: (555) 123-4567</li>
+              <li>{{ t('email') }}: info@ecosflooring.com</li>
+              <li>{{ t('mon_fri') }}</li>
+              <li>{{ t('sat') }}</li>
             </ul>
           </div>
         </div>
         <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400">
-          <p>&copy; 2025 Ecos Flooring. All rights reserved.</p>
+          <p>{{ t('copyright') }}</p>
         </div>
       </div>
     </footer>
@@ -67,6 +67,9 @@
 <script setup lang="ts">
 import StoreNavigation from '@/components/StoreNavigation.vue'
 import LiveChat from '@/components/LiveChat.vue'
+import { useLocale } from '@/composables/useLocale'
+
+const { t } = useLocale()
 
 interface Category {
   id: number

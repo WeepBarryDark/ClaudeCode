@@ -62,20 +62,8 @@ class HandleInertiaRequests extends Middleware
         $locale = app()->getLocale();
         $path = lang_path($locale . '/messages.php');
         
-        // Debug log
-        \Log::info('Loading translations', [
-            'locale' => $locale,
-            'path' => $path,
-            'file_exists' => file_exists($path)
-        ]);
-        
         if (file_exists($path)) {
-            $translations = include $path;
-            \Log::info('Translations loaded', [
-                'locale' => $locale,
-                'translation_count' => count($translations)
-            ]);
-            return $translations;
+            return include $path;
         }
         
         // Fallback to English

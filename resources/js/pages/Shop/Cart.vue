@@ -5,9 +5,9 @@
       <section class="bg-gray-50 py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center">
-            <h1 class="text-3xl font-bold text-gray-900 mb-4">Shopping Cart</h1>
+            <h1 class="text-3xl font-bold text-gray-900 mb-4">{{ t('shopping_cart') }}</h1>
             <p class="text-lg text-gray-600">
-              Review your items and proceed to checkout
+              {{ t('review_checkout') }}
             </p>
           </div>
         </div>
@@ -19,10 +19,10 @@
           <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
             <ShoppingCartIcon class="h-12 w-12 text-gray-400" />
           </div>
-          <h2 class="text-2xl font-semibold text-gray-900 mb-4">Your cart is empty</h2>
-          <p class="text-gray-600 mb-8">Start shopping to add items to your cart</p>
+          <h2 class="text-2xl font-semibold text-gray-900 mb-4">{{ t('cart_empty') }}</h2>
+          <p class="text-gray-600 mb-8">{{ t('start_shopping_message') }}</p>
           <Link :href="route('products')" class="bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors">
-            Browse Products
+            {{ t('browse_products') }}
           </Link>
         </div>
 
@@ -31,7 +31,7 @@
           <!-- Cart Items -->
           <div class="lg:col-span-2">
             <div class="bg-white">
-              <h2 class="text-xl font-semibold text-gray-900 mb-6">Cart Items ({{ cartItems.length }})</h2>
+              <h2 class="text-xl font-semibold text-gray-900 mb-6">{{ t('cart_items') }} ({{ cartItems.length }})</h2>
               
               <div class="space-y-6">
                 <div
@@ -47,7 +47,7 @@
                       :alt="item.product.name"
                       class="w-full h-full object-cover rounded-lg"
                     />
-                    <span v-else class="text-gray-500 text-sm">No Image</span>
+                    <span v-else class="text-gray-500 text-sm">{{ t('no_image') }}</span>
                   </div>
 
                   <!-- Product Details -->
@@ -65,7 +65,7 @@
                       <!-- Quantity Controls -->
                       <div class="flex items-center space-x-4">
                         <div class="flex items-center space-x-2">
-                          <label class="text-sm font-medium text-gray-700">Qty:</label>
+                          <label class="text-sm font-medium text-gray-700">{{ t('quantity') }}:</label>
                           <div class="flex items-center border border-gray-300 rounded-lg">
                             <button
                               @click="updateQuantity(item.id, item.quantity - 1)"
@@ -88,7 +88,7 @@
                         <button
                           @click="removeItem(item.id)"
                           class="p-2 text-red-600 hover:text-red-700"
-                          title="Remove item"
+:title="t('remove_item')"
                         >
                           <TrashIcon class="h-5 w-5" />
                         </button>
@@ -98,7 +98,7 @@
                     <!-- Item Total -->
                     <div class="mt-4 pt-4 border-t border-gray-200">
                       <div class="flex justify-between items-center">
-                        <span class="text-sm text-gray-600">Item Total:</span>
+                        <span class="text-sm text-gray-600">{{ t('item_total') }}:</span>
                         <span class="text-lg font-semibold text-gray-900">
                           ${{ (parseFloat(getDisplayPrice(item.product)) * item.quantity).toFixed(2) }}
                         </span>
@@ -111,7 +111,7 @@
               <!-- Continue Shopping -->
               <div class="mt-8 pt-6 border-t border-gray-200">
                 <Link :href="route('products')" class="text-green-600 hover:text-green-700 font-medium">
-                  ← Continue Shopping
+                  ← {{ t('continue_shopping') }}
                 </Link>
               </div>
             </div>
@@ -120,24 +120,24 @@
           <!-- Order Summary -->
           <div class="lg:col-span-1">
             <div class="bg-gray-50 rounded-lg p-6 sticky top-8">
-              <h3 class="text-lg font-semibold text-gray-900 mb-4">Order Summary</h3>
+              <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ t('order_summary') }}</h3>
 
               <div class="space-y-3 mb-6">
                 <div class="flex justify-between">
-                  <span class="text-gray-600">Subtotal</span>
+                  <span class="text-gray-600">{{ t('subtotal') }}</span>
                   <span class="font-medium">${{ subtotal }}</span>
                 </div>
                 <div class="flex justify-between">
-                  <span class="text-gray-600">Shipping</span>
-                  <span class="font-medium">{{ shipping === 0 ? 'FREE' : `$${shipping}` }}</span>
+                  <span class="text-gray-600">{{ t('shipping') }}</span>
+                  <span class="font-medium">{{ shipping === 0 ? t('free') : `$${shipping}` }}</span>
                 </div>
                 <div class="flex justify-between">
-                  <span class="text-gray-600">Tax (8.5%)</span>
+                  <span class="text-gray-600">{{ t('tax') }} (8.5%)</span>
                   <span class="font-medium">${{ tax }}</span>
                 </div>
                 <div class="border-t border-gray-300 pt-3">
                   <div class="flex justify-between">
-                    <span class="text-lg font-semibold">Total</span>
+                    <span class="text-lg font-semibold">{{ t('total') }}</span>
                     <span class="text-lg font-bold text-green-600">${{ total }}</span>
                   </div>
                 </div>
@@ -148,9 +148,9 @@
                 <div class="flex items-start space-x-2">
                   <TruckIcon class="h-5 w-5 text-green-600 mt-0.5" />
                   <div>
-                    <p class="text-sm font-medium text-green-800">Free shipping on orders over $99</p>
+                    <p class="text-sm font-medium text-green-800">{{ t('free_shipping_over_99') }}</p>
                     <p class="text-xs text-green-600">
-                      {{ parseFloat(subtotal) >= 99 ? 'You qualify for free shipping!' : `Add $${(99 - parseFloat(subtotal)).toFixed(2)} more for free shipping` }}
+                      {{ parseFloat(subtotal) >= 99 ? t('qualify_free_shipping') : t('add_for_free_shipping').replace(':amount', `$${(99 - parseFloat(subtotal)).toFixed(2)}`) }}
                     </p>
                   </div>
                 </div>
@@ -162,13 +162,13 @@
                 :disabled="processing || cartItems.length === 0"
                 class="w-full bg-green-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors mb-4"
               >
-                <span v-if="processing">Processing...</span>
-                <span v-else>Proceed to Checkout</span>
+                <span v-if="processing">{{ t('processing') }}...</span>
+                <span v-else>{{ t('proceed_to_checkout') }}</span>
               </button>
 
               <!-- Payment Options -->
               <div class="text-center text-sm text-gray-600 mb-4">
-                <p>Secure checkout with:</p>
+                <p>{{ t('secure_checkout_with') }}:</p>
                 <div class="flex justify-center space-x-2 mt-2">
                   <span class="px-2 py-1 bg-white rounded border text-xs">VISA</span>
                   <span class="px-2 py-1 bg-white rounded border text-xs">MC</span>
@@ -183,7 +183,7 @@
                 @click="saveForLater"
                 class="w-full text-gray-600 hover:text-gray-800 py-2 text-sm font-medium border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
               >
-                Save Cart for Later
+                {{ t('save_cart_later') }}
               </button>
             </div>
           </div>
@@ -191,7 +191,7 @@
 
         <!-- Recommended Products -->
         <div v-if="recommendedProducts.length > 0" class="mt-16">
-          <h2 class="text-2xl font-bold text-gray-900 mb-8">You might also like</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-8">{{ t('you_might_like') }}</h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <div
               v-for="product in recommendedProducts"
@@ -205,7 +205,7 @@
                   :alt="product.name"
                   class="w-full h-full object-cover"
                 />
-                <span v-else class="text-gray-500">No Image</span>
+                <span v-else class="text-gray-500">{{ t('no_image') }}</span>
               </div>
               <div class="p-4">
                 <p class="text-xs text-green-600 font-medium uppercase tracking-wide mb-1">
@@ -218,7 +218,7 @@
                     @click="addToCart(product.id)"
                     class="px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700 transition-colors"
                   >
-                    Add to Cart
+                    {{ t('add_to_cart') }}
                   </button>
                 </div>
               </div>
@@ -241,6 +241,9 @@ import {
   TruckIcon 
 } from '@heroicons/vue/24/outline'
 import ShopLayout from '@/layouts/ShopLayout.vue'
+import { useLocale } from '@/composables/useLocale'
+
+const { t } = useLocale()
 
 interface Category {
   id: number

@@ -8,8 +8,8 @@
           <span class="text-white font-bold text-sm">EF</span>
         </div>
         <div>
-          <span class="text-lg font-bold text-gray-900">Ecos Flooring</span>
-          <span class="block text-xs text-gray-500">Admin Panel</span>
+          <span class="text-lg font-bold text-gray-900">{{ t('ecos_flooring') }}</span>
+          <span class="block text-xs text-gray-500">{{ t('admin_panel') }}</span>
         </div>
       </Link>
     </div>
@@ -20,32 +20,32 @@
         <a href="/admin/dashboard" 
               class="flex items-center px-3 py-2 text-sm font-medium rounded-lg text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors group">
           <LayoutGrid class="h-5 w-5 mr-3 text-gray-400 group-hover:text-green-600" />
-          Dashboard
+          {{ t('dashboard') }}
         </a>
         <a href="/admin/products" 
               class="flex items-center px-3 py-2 text-sm font-medium rounded-lg text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors group">
           <Package class="h-5 w-5 mr-3 text-gray-400 group-hover:text-green-600" />
-          Products
+          {{ t('products') }}
         </a>
         <a href="/admin/orders" 
               class="flex items-center px-3 py-2 text-sm font-medium rounded-lg text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors group">
           <ShoppingCart class="h-5 w-5 mr-3 text-gray-400 group-hover:text-green-600" />
-          Orders
+          {{ t('orders') }}
         </a>
         <a href="/admin/inventory" 
               class="flex items-center px-3 py-2 text-sm font-medium rounded-lg text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors group">
           <BarChart3 class="h-5 w-5 mr-3 text-gray-400 group-hover:text-green-600" />
-          Inventory
+          {{ t('inventory') }}
         </a>
         <a href="/admin/customers" 
               class="flex items-center px-3 py-2 text-sm font-medium rounded-lg text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors group">
           <Users class="h-5 w-5 mr-3 text-gray-400 group-hover:text-green-600" />
-          Customers
+          {{ t('customers') }}
         </a>
         <a href="/admin/messages" 
               class="flex items-center px-3 py-2 text-sm font-medium rounded-lg text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors group">
           <MessageSquare class="h-5 w-5 mr-3 text-gray-400 group-hover:text-green-600" />
-          Messages
+          {{ t('messages') }}
         </a>
       </div>
     </nav>
@@ -60,7 +60,7 @@
         
         <Link :href="route('home')" class="flex items-center px-3 py-2 text-sm font-medium rounded-lg text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors group">
           <Store class="h-5 w-5 mr-3 text-gray-400 group-hover:text-green-600" />
-          Back to Store
+          {{ t('back_to_store') }}
         </Link>
         
         <div class="relative group">
@@ -72,11 +72,11 @@
           <div class="absolute bottom-full left-0 right-0 mb-1 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
             <Link :href="route('profile.edit')"
                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 rounded-t-md">
-              Profile Settings
+              {{ t('profile_settings') }}
             </Link>
             <Link :href="route('logout')" method="post" as="button"
                   class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-green-50 border-t rounded-b-md">
-              Sign Out
+              {{ t('sign_out') }}
             </Link>
           </div>
         </div>
@@ -95,8 +95,8 @@
           <span class="text-white font-bold text-sm">EF</span>
         </div>
         <div>
-          <span class="text-lg font-bold text-gray-900">Ecos Flooring</span>
-          <span class="block text-xs text-gray-500">Admin Panel</span>
+          <span class="text-lg font-bold text-gray-900">{{ t('ecos_flooring') }}</span>
+          <span class="block text-xs text-gray-500">{{ t('admin_panel') }}</span>
         </div>
       </Link>
       <button @click="mobileMenuOpen = false" class="p-2 text-gray-700">
@@ -108,27 +108,27 @@
       <div class="space-y-1">
         <a href="/admin/dashboard" @click="mobileMenuOpen = false"
               class="flex items-center px-3 py-2 text-sm font-medium rounded-lg text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors">
-          <LayoutGrid class="h-5 w-5 mr-3" />Dashboard
+          <LayoutGrid class="h-5 w-5 mr-3" />{{ t('dashboard') }}
         </a>
         <a href="/admin/products" @click="mobileMenuOpen = false"
               class="flex items-center px-3 py-2 text-sm font-medium rounded-lg text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors">
-          <Package class="h-5 w-5 mr-3" />Products
+          <Package class="h-5 w-5 mr-3" />{{ t('products') }}
         </a>
         <a href="/admin/orders" @click="mobileMenuOpen = false"
               class="flex items-center px-3 py-2 text-sm font-medium rounded-lg text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors">
-          <ShoppingCart class="h-5 w-5 mr-3" />Orders
+          <ShoppingCart class="h-5 w-5 mr-3" />{{ t('orders') }}
         </a>
         <a href="/admin/inventory" @click="mobileMenuOpen = false"
               class="flex items-center px-3 py-2 text-sm font-medium rounded-lg text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors">
-          <BarChart3 class="h-5 w-5 mr-3" />Inventory
+          <BarChart3 class="h-5 w-5 mr-3" />{{ t('inventory') }}
         </a>
         <a href="/admin/customers" @click="mobileMenuOpen = false"
               class="flex items-center px-3 py-2 text-sm font-medium rounded-lg text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors">
-          <Users class="h-5 w-5 mr-3" />Customers
+          <Users class="h-5 w-5 mr-3" />{{ t('customers') }}
         </a>
         <a href="/admin/messages" @click="mobileMenuOpen = false"
               class="flex items-center px-3 py-2 text-sm font-medium rounded-lg text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors">
-          <MessageSquare class="h-5 w-5 mr-3" />Messages
+          <MessageSquare class="h-5 w-5 mr-3" />{{ t('messages') }}
         </a>
       </div>
     </nav>

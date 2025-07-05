@@ -73,11 +73,9 @@ export function useLocale() {
         // This connects to the PHP language files in /lang/{locale}/messages.php
         const translations = page.props.translations || {}
         
-        // Debug log to see what's happening
-        if (key === 'home') {
-            console.log('Current locale:', currentLocale.value)
-            console.log('Translations available:', Object.keys(translations).length)
-            console.log('Translation for home:', translations[key])
+        // Only log if no translation found
+        if (!translations[key] && process.env.NODE_ENV === 'development') {
+            console.warn(`Missing translation for key: "${key}" in locale: ${currentLocale.value}`)
         }
         
         return translations[key] || fallback || key

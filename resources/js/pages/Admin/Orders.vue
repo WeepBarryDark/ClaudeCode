@@ -1,17 +1,17 @@
 <template>
-  <StoreAdminLayout pageTitle="Orders">
+  <StoreAdminLayout :pageTitle="t('orders')">
     <div>
       <!-- Header Actions -->
       <div class="mb-6 flex justify-between items-center">
         <div>
-          <p class="text-gray-600">Track and manage customer orders</p>
+          <p class="text-gray-600">{{ t('track_manage_orders') }}</p>
         </div>
         <div class="flex space-x-3">
           <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors">
-            Export Orders
+            {{ t('export_orders') }}
           </button>
           <button class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
-            New Order
+            {{ t('new_order') }}
           </button>
         </div>
       </div>
@@ -23,17 +23,17 @@
             <input
               type="text"
               v-model="searchQuery"
-              placeholder="Search orders by number or customer..."
+              :placeholder="t('search_orders_placeholder')"
               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 text-gray-900 bg-white placeholder-gray-500"
             />
           </div>
           <select v-model="statusFilter" class="px-3 py-2 border border-gray-300 rounded-lg text-gray-900 bg-white">
-            <option value="">All Status</option>
-            <option value="pending">Pending</option>
-            <option value="processing">Processing</option>
-            <option value="shipped">Shipped</option>
-            <option value="delivered">Delivered</option>
-            <option value="cancelled">Cancelled</option>
+            <option value="">{{ t('all_status') }}</option>
+            <option value="pending">{{ t('pending') }}</option>
+            <option value="processing">{{ t('processing') }}</option>
+            <option value="shipped">{{ t('shipped') }}</option>
+            <option value="delivered">{{ t('delivered') }}</option>
+            <option value="cancelled">{{ t('cancelled') }}</option>
           </select>
           <input
             type="date"
@@ -46,7 +46,7 @@
       <!-- Orders Table -->
       <div class="bg-white rounded-lg shadow overflow-hidden">
         <div class="px-6 py-4 border-b border-gray-200">
-          <h3 class="text-lg font-semibold text-gray-900">Order Management</h3>
+          <h3 class="text-lg font-semibold text-gray-900">{{ t('order_management') }}</h3>
         </div>
         
         <!-- Table -->
@@ -54,12 +54,12 @@
           <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
               <tr>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Customer</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ t('order') }}</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ t('customer') }}</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ t('date') }}</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ t('total') }}</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ t('status') }}</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ t('actions') }}</th>
               </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
@@ -67,7 +67,7 @@
                 <td class="px-6 py-4 whitespace-nowrap">
                   <div>
                     <div class="text-sm font-medium text-gray-900">#{{ order.orderNumber }}</div>
-                    <div class="text-sm text-gray-500">{{ order.items }} items</div>
+                    <div class="text-sm text-gray-500">{{ order.items }} {{ t('items') }}</div>
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
@@ -87,13 +87,13 @@
                     order.status === 'delivered' ? 'bg-green-100 text-green-800' :
                     'bg-red-100 text-red-800'
                   ]">
-                    {{ order.status }}
+                    {{ t(order.status) }}
                   </span>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                  <button class="text-green-600 hover:text-green-900 mr-3">View</button>
-                  <button class="text-blue-600 hover:text-blue-900 mr-3">Edit</button>
-                  <button class="text-gray-600 hover:text-gray-900">Print</button>
+                  <button class="text-green-600 hover:text-green-900 mr-3">{{ t('view') }}</button>
+                  <button class="text-blue-600 hover:text-blue-900 mr-3">{{ t('edit') }}</button>
+                  <button class="text-gray-600 hover:text-gray-900">{{ t('print') }}</button>
                 </td>
               </tr>
             </tbody>
@@ -104,13 +104,13 @@
         <div class="px-6 py-4 border-t border-gray-200">
           <div class="flex items-center justify-between">
             <div class="text-sm text-gray-700">
-              Showing 1 to {{ Math.min(10, filteredOrders.length) }} of {{ filteredOrders.length }} results
+              {{ t('showing_results', { from: 1, to: Math.min(10, filteredOrders.length), total: filteredOrders.length }) }}
             </div>
             <div class="flex space-x-2">
-              <button class="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">Previous</button>
+              <button class="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">{{ t('previous') }}</button>
               <button class="px-3 py-1 bg-green-600 text-white rounded text-sm">1</button>
               <button class="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">2</button>
-              <button class="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">Next</button>
+              <button class="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">{{ t('next') }}</button>
             </div>
           </div>
         </div>
@@ -122,6 +122,9 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import StoreAdminLayout from '@/layouts/StoreAdminLayout.vue'
+import { useLocale } from '@/composables/useLocale'
+
+const { t } = useLocale()
 
 const searchQuery = ref('')
 const statusFilter = ref('')

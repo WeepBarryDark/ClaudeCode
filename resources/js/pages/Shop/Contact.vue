@@ -5,10 +5,9 @@
       <section class="bg-gray-50 py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center">
-            <h1 class="text-4xl font-bold text-gray-900 mb-4">Contact Us</h1>
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">{{ t('contact_us') }}</h1>
             <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-              Have questions about our flooring options? Need expert advice? 
-              We're here to help you find the perfect solution for your space.
+              {{ t('contact_description') }}
             </p>
           </div>
         </div>
@@ -19,7 +18,7 @@
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <!-- Contact Information -->
             <div>
-              <h2 class="text-2xl font-bold text-gray-900 mb-6">Get in Touch</h2>
+              <h2 class="text-2xl font-bold text-gray-900 mb-6">{{ t('get_in_touch') }}</h2>
               
               <div class="space-y-6">
                 <div class="flex items-start space-x-4">
@@ -27,7 +26,7 @@
                     <span class="text-green-600">📍</span>
                   </div>
                   <div>
-                    <h3 class="font-semibold text-gray-900">Visit Our Showroom</h3>
+                    <h3 class="font-semibold text-gray-900">{{ t('address') }}</h3>
                     <p class="text-gray-600">
                       123 Flooring Street<br>
                       Design District<br>
@@ -41,7 +40,7 @@
                     <span class="text-green-600">📞</span>
                   </div>
                   <div>
-                    <h3 class="font-semibold text-gray-900">Call Us</h3>
+                    <h3 class="font-semibold text-gray-900">{{ t('phone') }}</h3>
                     <p class="text-gray-600">
                       <a href="tel:555-123-4567" class="hover:text-green-600">(555) 123-4567</a><br>
                       <a href="tel:555-123-4568" class="hover:text-green-600">(555) 123-4568</a> (Installation)
@@ -54,7 +53,7 @@
                     <span class="text-green-600">✉️</span>
                   </div>
                   <div>
-                    <h3 class="font-semibold text-gray-900">Email Us</h3>
+                    <h3 class="font-semibold text-gray-900">{{ t('email') }}</h3>
                     <p class="text-gray-600">
                       <a href="mailto:info@ecosflooring.com" class="hover:text-green-600">info@ecosflooring.com</a><br>
                       <a href="mailto:sales@ecosflooring.com" class="hover:text-green-600">sales@ecosflooring.com</a>
@@ -67,11 +66,11 @@
                     <span class="text-green-600">🕒</span>
                   </div>
                   <div>
-                    <h3 class="font-semibold text-gray-900">Business Hours</h3>
+                    <h3 class="font-semibold text-gray-900">{{ t('business_hours') }}</h3>
                     <p class="text-gray-600">
-                      Monday - Friday: 8:00 AM - 6:00 PM<br>
-                      Saturday: 9:00 AM - 4:00 PM<br>
-                      Sunday: Closed
+                      {{ t('monday_friday') }}<br>
+                      {{ t('saturday') }}<br>
+                      {{ t('sunday_closed') }}
                     </p>
                   </div>
                 </div>
@@ -80,12 +79,12 @@
 
             <!-- Contact Form -->
             <div class="bg-gray-50 rounded-lg p-8">
-              <h2 class="text-2xl font-bold text-gray-900 mb-6">Send us a Message</h2>
+              <h2 class="text-2xl font-bold text-gray-900 mb-6">{{ t('send_message') }}</h2>
               
               <form @submit.prevent="submitForm" class="space-y-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Name *</label>
+                    <label for="name" class="block text-sm font-medium text-gray-700 mb-2">{{ t('full_name') }} *</label>
                     <input
                       v-model="form.name"
                       type="text"
@@ -96,7 +95,7 @@
                   </div>
                   
                   <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">{{ t('email') }} *</label>
                     <input
                       v-model="form.email"
                       type="email"
@@ -108,7 +107,7 @@
                 </div>
                 
                 <div>
-                  <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone</label>
+                  <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">{{ t('phone') }}</label>
                   <input
                     v-model="form.phone"
                     type="tel"
@@ -118,7 +117,7 @@
                 </div>
                 
                 <div>
-                  <label for="category" class="block text-sm font-medium text-gray-700 mb-2">Category *</label>
+                  <label for="category" class="block text-sm font-medium text-gray-700 mb-2">{{ t('category') }} *</label>
                   <select
                     v-model="form.category"
                     id="category"
@@ -136,7 +135,7 @@
                 </div>
                 
                 <div>
-                  <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">Subject *</label>
+                  <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">{{ t('subject') }} *</label>
                   <input
                     v-model="form.subject"
                     type="text"
@@ -147,7 +146,7 @@
                 </div>
                 
                 <div>
-                  <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message *</label>
+                  <label for="message" class="block text-sm font-medium text-gray-700 mb-2">{{ t('message') }} *</label>
                   <textarea
                     v-model="form.message"
                     id="message"
@@ -162,8 +161,8 @@
                   :disabled="submitting"
                   class="w-full bg-green-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
-                  <span v-if="!submitting">Send Message</span>
-                  <span v-else>Sending...</span>
+                  <span v-if="!submitting">{{ t('send_message_button') }}</span>
+                  <span v-else>{{ t('processing') }}...</span>
                 </button>
               </form>
             </div>
@@ -178,6 +177,9 @@
 import { ref } from 'vue'
 import { router } from '@inertiajs/vue3'
 import ShopLayout from '@/layouts/ShopLayout.vue'
+import { useLocale } from '@/composables/useLocale'
+
+const { t } = useLocale()
 
 interface Category {
   id: number

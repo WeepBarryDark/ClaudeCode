@@ -1,17 +1,17 @@
 <template>
-  <StoreAdminLayout pageTitle="Messages">
+  <StoreAdminLayout :pageTitle="t('messages')">
     <div>
       <!-- Header Actions -->
       <div class="mb-6 flex justify-between items-center">
         <div>
-          <p class="text-gray-600">Customer inquiries and support messages</p>
+          <p class="text-gray-600">{{ t('customer_inquiries_support') }}</p>
         </div>
         <div class="flex space-x-3">
           <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors">
-            Mark All Read
+            {{ t('mark_all_read') }}
           </button>
           <button class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
-            Compose Message
+            {{ t('compose_message') }}
           </button>
         </div>
       </div>
@@ -24,7 +24,7 @@
               <span class="text-yellow-600 text-sm">📧</span>
             </div>
             <div>
-              <p class="text-sm text-gray-600">Total Messages</p>
+              <p class="text-sm text-gray-600">{{ t('total_messages') }}</p>
               <p class="text-2xl font-bold text-gray-900">{{ stats.totalMessages }}</p>
             </div>
           </div>
@@ -36,7 +36,7 @@
               <span class="text-red-600 text-sm">🔴</span>
             </div>
             <div>
-              <p class="text-sm text-gray-600">Unread</p>
+              <p class="text-sm text-gray-600">{{ t('unread') }}</p>
               <p class="text-2xl font-bold text-gray-900">{{ stats.unreadMessages }}</p>
             </div>
           </div>
@@ -48,7 +48,7 @@
               <span class="text-green-600 text-sm">✅</span>
             </div>
             <div>
-              <p class="text-sm text-gray-600">Resolved Today</p>
+              <p class="text-sm text-gray-600">{{ t('resolved_today') }}</p>
               <p class="text-2xl font-bold text-gray-900">{{ stats.resolvedToday }}</p>
             </div>
           </div>
@@ -60,7 +60,7 @@
               <span class="text-blue-600 text-sm">⏱️</span>
             </div>
             <div>
-              <p class="text-sm text-gray-600">Avg Response Time</p>
+              <p class="text-sm text-gray-600">{{ t('avg_response_time') }}</p>
               <p class="text-2xl font-bold text-gray-900">{{ stats.avgResponseTime }}</p>
             </div>
           </div>
@@ -74,25 +74,25 @@
             <input
               type="text"
               v-model="searchQuery"
-              placeholder="Search messages..."
+              :placeholder="t('search_messages')"
               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 text-gray-900 bg-white placeholder-gray-500"
             />
           </div>
           <select v-model="categoryFilter" class="px-3 py-2 border border-gray-300 rounded-lg text-gray-900 bg-white">
-            <option value="">All Categories</option>
-            <option value="general">General Inquiry</option>
-            <option value="product_inquiry">Product Information</option>
-            <option value="sample_request">Sample Request</option>
-            <option value="installation">Installation Services</option>
-            <option value="warranty">Warranty Claim</option>
-            <option value="complaint">Complaint</option>
+            <option value="">{{ t('all_categories') }}</option>
+            <option value="general">{{ t('general_inquiry') }}</option>
+            <option value="product_inquiry">{{ t('product_information') }}</option>
+            <option value="sample_request">{{ t('sample_request') }}</option>
+            <option value="installation">{{ t('installation_services') }}</option>
+            <option value="warranty">{{ t('warranty_claim') }}</option>
+            <option value="complaint">{{ t('complaint') }}</option>
           </select>
           <select v-model="statusFilter" class="px-3 py-2 border border-gray-300 rounded-lg text-gray-900 bg-white">
             <option value="">All Status</option>
-            <option value="unread">Unread</option>
-            <option value="read">Read</option>
-            <option value="replied">Replied</option>
-            <option value="resolved">Resolved</option>
+            <option value="unread">{{ t('unread') }}</option>
+            <option value="read">{{ t('read') }}</option>
+            <option value="replied">{{ t('replied') }}</option>
+            <option value="resolved">{{ t('resolved') }}</option>
           </select>
         </div>
       </div>
@@ -100,7 +100,7 @@
       <!-- Messages Table -->
       <div class="bg-white rounded-lg shadow overflow-hidden">
         <div class="px-6 py-4 border-b border-gray-200">
-          <h3 class="text-lg font-semibold text-gray-900">Customer Messages</h3>
+          <h3 class="text-lg font-semibold text-gray-900">{{ t('customer_messages') }}</h3>
         </div>
         
         <!-- Table -->
@@ -108,12 +108,12 @@
           <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
               <tr>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Customer</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Subject</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ t('customer') }}</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ t('category') }}</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ t('subject') }}</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ t('date') }}</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ t('status') }}</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ t('actions') }}</th>
               </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
@@ -155,13 +155,13 @@
                     message.status === 'replied' ? 'bg-blue-100 text-blue-800' :
                     'bg-green-100 text-green-800'
                   ]">
-                    {{ message.status }}
+                    {{ t(message.status) }}
                   </span>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                  <button class="text-green-600 hover:text-green-900 mr-3">Reply</button>
-                  <button class="text-blue-600 hover:text-blue-900 mr-3">View</button>
-                  <button class="text-gray-600 hover:text-gray-900">Mark Read</button>
+                  <button class="text-green-600 hover:text-green-900 mr-3">{{ t('reply') }}</button>
+                  <button class="text-blue-600 hover:text-blue-900 mr-3">{{ t('view') }}</button>
+                  <button class="text-gray-600 hover:text-gray-900">{{ t('mark_read') }}</button>
                 </td>
               </tr>
             </tbody>
@@ -172,13 +172,13 @@
         <div class="px-6 py-4 border-t border-gray-200">
           <div class="flex items-center justify-between">
             <div class="text-sm text-gray-700">
-              Showing 1 to {{ Math.min(10, filteredMessages.length) }} of {{ filteredMessages.length }} results
+              {{ t('showing_results', { from: 1, to: Math.min(10, filteredMessages.length), total: filteredMessages.length }) }}
             </div>
             <div class="flex space-x-2">
-              <button class="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">Previous</button>
+              <button class="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">{{ t('previous') }}</button>
               <button class="px-3 py-1 bg-green-600 text-white rounded text-sm">1</button>
               <button class="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">2</button>
-              <button class="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">Next</button>
+              <button class="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">{{ t('next') }}</button>
             </div>
           </div>
         </div>
@@ -190,6 +190,9 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import StoreAdminLayout from '@/layouts/StoreAdminLayout.vue'
+import { useLocale } from '@/composables/useLocale'
+
+const { t } = useLocale()
 
 const searchQuery = ref('')
 const categoryFilter = ref('')

@@ -16,29 +16,16 @@ class SetUserLocaleAndTimezone
         if (Auth::check()) {
             $user = Auth::user();
             
-            // Debug log
-            \Log::info('Setting user locale', [
-                'user_id' => $user->id,
-                'user_locale' => $user->locale,
-                'current_app_locale' => app()->getLocale()
-            ]);
-            
             // Set locale
             if ($user->locale) {
                 App::setLocale($user->locale);
                 Session::put('locale', $user->locale);
-                
-                \Log::info('Locale set', [
-                    'new_app_locale' => app()->getLocale()
-                ]);
             }
             
             // Set timezone
             if ($user->timezone) {
                 config(['app.timezone' => $user->timezone]);
                 Session::put('timezone', $user->timezone);
-                
-                // Set Carbon timezone globally
                 date_default_timezone_set($user->timezone);
             }
         } else {
@@ -46,11 +33,6 @@ class SetUserLocaleAndTimezone
             if (Session::has('locale')) {
                 $sessionLocale = Session::get('locale');
                 App::setLocale($sessionLocale);
-                
-                \Log::info('Guest locale set from session', [
-                    'session_locale' => $sessionLocale,
-                    'current_app_locale' => app()->getLocale()
-                ]);
             }
             
             if (Session::has('timezone')) {

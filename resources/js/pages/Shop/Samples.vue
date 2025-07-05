@@ -5,10 +5,9 @@
       <section class="bg-gradient-to-r from-green-600 to-green-700 text-white py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Order Free Samples</h1>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">{{ t('order_free_samples') }}</h1>
             <p class="text-xl text-green-100 max-w-3xl mx-auto">
-              Experience our premium flooring materials before you buy. Order up to 8 free samples 
-              and feel the quality, texture, and beauty of our products in your own space.
+              {{ t('samples_description') }}
             </p>
           </div>
         </div>
@@ -22,22 +21,22 @@
               <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span class="text-2xl">📦</span>
               </div>
-              <h3 class="text-lg font-semibold mb-2">100% Free</h3>
-              <p class="text-gray-600">No shipping charges, no hidden fees. Completely free samples delivered to your door.</p>
+              <h3 class="text-lg font-semibold mb-2">{{ t('free') }}</h3>
+              <p class="text-gray-600">{{ t('no_shipping_charges') }}</p>
             </div>
             <div class="text-center">
               <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span class="text-2xl">⚡</span>
               </div>
-              <h3 class="text-lg font-semibold mb-2">Fast Delivery</h3>
-              <p class="text-gray-600">Samples shipped within 2-3 business days. Get them quickly to make your decision.</p>
+              <h3 class="text-lg font-semibold mb-2">{{ t('fast_delivery') }}</h3>
+              <p class="text-gray-600">{{ t('fast_delivery_description') }}</p>
             </div>
             <div class="text-center">
               <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span class="text-2xl">✋</span>
               </div>
-              <h3 class="text-lg font-semibold mb-2">Feel the Quality</h3>
-              <p class="text-gray-600">Touch, feel, and see the actual product. Nothing beats experiencing it yourself.</p>
+              <h3 class="text-lg font-semibold mb-2">{{ t('feel_quality') }}</h3>
+              <p class="text-gray-600">{{ t('feel_quality_description') }}</p>
             </div>
           </div>
         </div>
@@ -48,8 +47,8 @@
           <!-- Product Selection -->
           <div class="lg:col-span-2">
             <div class="mb-8">
-              <h2 class="text-2xl font-bold text-gray-900 mb-2">Select Your Samples</h2>
-              <p class="text-gray-600">Choose up to 8 samples from our collection. Mix and match different types to compare.</p>
+              <h2 class="text-2xl font-bold text-gray-900 mb-2">{{ t('select_samples') }}</h2>
+              <p class="text-gray-600">{{ t('sample_limit') }}</p>
             </div>
 
             <!-- Category Filter -->
@@ -64,7 +63,7 @@
                       : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                   ]"
                 >
-                  All Categories
+                  {{ t('all_products') }}
                 </button>
                 <button
                   v-for="category in categories"
@@ -96,7 +95,7 @@
                     :alt="product.name"
                     class="w-full h-full object-cover"
                   />
-                  <span v-else class="text-gray-500">No Image</span>
+                  <span v-else class="text-gray-500">{{ t('no_image') }}</span>
                 </div>
                 <div class="p-4">
                   <p class="text-xs text-green-600 font-medium uppercase tracking-wide mb-1">
@@ -119,7 +118,7 @@
                           : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                       ]"
                     >
-                      {{ isSelected(product.id) ? 'Selected' : 'Select Sample' }}
+                      {{ isSelected(product.id) ? t('selected_samples') : t('samples') }}
                     </button>
                   </div>
                 </div>
@@ -131,7 +130,7 @@
           <div class="lg:col-span-1">
             <div class="bg-gray-50 rounded-lg p-6 sticky top-8">
               <h3 class="text-lg font-semibold text-gray-900 mb-4">
-                Your Sample Selection ({{ selectedSamples.length }}/8)
+                {{ t('selected_samples') }} ({{ selectedSamples.length }}/8)
               </h3>
 
               <!-- Selected Samples -->
@@ -149,7 +148,7 @@
                     @click="removeSample(sample.id)"
                     class="text-red-600 hover:text-red-700 text-sm"
                   >
-                    Remove
+                    {{ t('remove_sample') }}
                   </button>
                 </div>
               </div>
@@ -158,18 +157,18 @@
                 <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-3">
                   <span class="text-2xl">📋</span>
                 </div>
-                <p class="text-sm">No samples selected yet</p>
-                <p class="text-xs">Choose up to 8 samples from our collection</p>
+                <p class="text-sm">{{ t('samples') }}</p>
+                <p class="text-xs">{{ t('sample_limit') }}</p>
               </div>
 
               <!-- Checkout Form -->
               <div v-if="selectedSamples.length > 0">
                 <div class="border-t border-gray-200 pt-6">
-                  <h4 class="font-medium text-gray-900 mb-4">Shipping Information</h4>
+                  <h4 class="font-medium text-gray-900 mb-4">{{ t('your_information') }}</h4>
                   
                   <form @submit.prevent="submitOrder" class="space-y-4">
                     <div>
-                      <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
+                      <label for="name" class="block text-sm font-medium text-gray-700 mb-1">{{ t('full_name') }} *</label>
                       <input
                         v-model="form.customer_name"
                         type="text"
@@ -180,7 +179,7 @@
                     </div>
 
                     <div>
-                      <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
+                      <label for="email" class="block text-sm font-medium text-gray-700 mb-1">{{ t('email_address') }} *</label>
                       <input
                         v-model="form.customer_email"
                         type="email"
@@ -191,7 +190,7 @@
                     </div>
 
                     <div>
-                      <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                      <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">{{ t('phone_number') }}</label>
                       <input
                         v-model="form.customer_phone"
                         type="tel"
@@ -201,7 +200,7 @@
                     </div>
 
                     <div>
-                      <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Shipping Address *</label>
+                      <label for="address" class="block text-sm font-medium text-gray-700 mb-1">{{ t('shipping_address') }} *</label>
                       <textarea
                         v-model="form.customer_address"
                         id="address"
@@ -215,17 +214,17 @@
                     <!-- Order Summary -->
                     <div class="bg-white p-4 rounded-lg border">
                       <div class="flex justify-between items-center mb-2">
-                        <span class="text-sm text-gray-600">Samples ({{ selectedSamples.length }})</span>
-                        <span class="font-medium">FREE</span>
+                        <span class="text-sm text-gray-600">{{ t('samples') }} ({{ selectedSamples.length }})</span>
+                        <span class="font-medium">{{ t('free') }}</span>
                       </div>
                       <div class="flex justify-between items-center mb-2">
-                        <span class="text-sm text-gray-600">Shipping</span>
-                        <span class="font-medium">FREE</span>
+                        <span class="text-sm text-gray-600">{{ t('shipping') }}</span>
+                        <span class="font-medium">{{ t('free') }}</span>
                       </div>
                       <div class="border-t border-gray-200 pt-2">
                         <div class="flex justify-between items-center">
-                          <span class="font-semibold">Total</span>
-                          <span class="font-bold text-green-600">FREE</span>
+                          <span class="font-semibold">{{ t('total') }}</span>
+                          <span class="font-bold text-green-600">{{ t('free') }}</span>
                         </div>
                       </div>
                     </div>
@@ -235,8 +234,8 @@
                       :disabled="submitting || selectedSamples.length === 0"
                       class="w-full bg-green-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                     >
-                      <span v-if="submitting">Processing...</span>
-                      <span v-else>Order Free Samples</span>
+                      <span v-if="submitting">{{ t('processing') }}...</span>
+                      <span v-else>{{ t('order_samples_button') }}</span>
                     </button>
 
                     <p class="text-xs text-gray-500 text-center">
@@ -255,9 +254,9 @@
       <section class="py-16 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-gray-900 mb-4">Why Order Samples?</h2>
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">{{ t('why_order_samples') }}</h2>
             <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-              Making the right flooring choice is important. Our free samples help you make confident decisions.
+              {{ t('why_order_samples_description') }}
             </p>
           </div>
           
@@ -266,32 +265,32 @@
               <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span class="text-3xl">👁️</span>
               </div>
-              <h3 class="text-lg font-semibold mb-2">See True Colors</h3>
-              <p class="text-gray-600 text-sm">Monitor screens can't show true colors. See the actual product in your lighting.</p>
+              <h3 class="text-lg font-semibold mb-2">{{ t('see_true_colors') }}</h3>
+              <p class="text-gray-600 text-sm">{{ t('see_true_colors_description') }}</p>
             </div>
             
             <div class="text-center">
               <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span class="text-3xl">🤲</span>
               </div>
-              <h3 class="text-lg font-semibold mb-2">Feel the Texture</h3>
-              <p class="text-gray-600 text-sm">Experience the surface texture, grain patterns, and overall feel of the material.</p>
+              <h3 class="text-lg font-semibold mb-2">{{ t('feel_the_texture') }}</h3>
+              <p class="text-gray-600 text-sm">{{ t('feel_the_texture_description') }}</p>
             </div>
             
             <div class="text-center">
               <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span class="text-3xl">🏠</span>
               </div>
-              <h3 class="text-lg font-semibold mb-2">Test in Your Space</h3>
-              <p class="text-gray-600 text-sm">See how the flooring looks with your furniture, lighting, and decor.</p>
+              <h3 class="text-lg font-semibold mb-2">{{ t('test_in_your_space') }}</h3>
+              <p class="text-gray-600 text-sm">{{ t('test_in_your_space_description') }}</p>
             </div>
             
             <div class="text-center">
               <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span class="text-3xl">⚖️</span>
               </div>
-              <h3 class="text-lg font-semibold mb-2">Compare Options</h3>
-              <p class="text-gray-600 text-sm">Order multiple samples to compare different styles, colors, and textures side by side.</p>
+              <h3 class="text-lg font-semibold mb-2">{{ t('compare_options') }}</h3>
+              <p class="text-gray-600 text-sm">{{ t('compare_options_description') }}</p>
             </div>
           </div>
         </div>
@@ -304,6 +303,9 @@
 import { ref, computed } from 'vue'
 import { router } from '@inertiajs/vue3'
 import ShopLayout from '@/layouts/ShopLayout.vue'
+import { useLocale } from '@/composables/useLocale'
+
+const { t } = useLocale()
 
 interface Category {
   id: number

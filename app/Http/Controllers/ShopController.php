@@ -97,9 +97,12 @@ class ShopController extends Controller
             ->with('category')
             ->paginate(12);
 
+        $categories = Category::where('is_active', true)->orderBy('sort_order')->get();
+
         return Inertia::render('Shop/CategoryProducts', [
             'category' => $category,
             'products' => $products,
+            'categories' => $categories,
         ]);
     }
 
